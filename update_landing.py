@@ -12,6 +12,60 @@ def remove_platform_badge(html):
     html = re.sub(r'<script>\s*\(\(\) => \{.*?lovable-badge.*?</script>', '', html, flags=re.S)
     return html
 
+def update_static_layout(html):
+    html = re.sub(
+        r'<a href="#signup" class="hidden rounded-full[^"]*">Проверить прогноз клева</a>',
+        '',
+        html,
+    )
+    html = re.sub(
+        r'(<div class="mt-8 flex flex-col gap-3 sm:flex-row">)<a href="#signup"[^>]*>Проверить прогноз клева[^<]*(?:<!-- -->[^<]*)?<svg[^>]*>.*?</svg></a>',
+        r'\1',
+        html,
+    )
+    html = re.sub(
+        r'<div class="mt-8"><a href="#signup"[^>]*>Попробовать бесплатно.*?</a></div>',
+        '',
+        html,
+    )
+    html = re.sub(
+        r'<div class="reveal mt-12 text-center" style="transition-delay:0ms"><a href="#signup"[^>]*>Проверить прогноз клева.*?</a></div>',
+        '',
+        html,
+    )
+    html = html.replace(
+        '<p class="text-sm text-primary-foreground/50">Учебный стартап-проект. MVP веб-сервиса для рыбаков</p>',
+        '',
+    )
+    return html.replace(
+        'items-center justify-between rounded-xl bg-muted px-3 py-2 text-sm"><span',
+        'items-center justify-between gap-3 rounded-xl bg-muted px-3 py-2 text-sm"><span',
+    ).replace(
+        '<span class="font-semibold text-primary">752 мм, стабильно</span>',
+        '<span class="font-semibold text-primary" style="text-align:right">752 мм, стабильно</span>',
+    )
+
+
+def update_client_layout(js):
+    js = re.sub(
+        r',\(0,T.jsx\)\(`a`,\{href:`#signup`,[^{}]*children:`Проверить прогноз клева`\}\)',
+        '',
+        js,
+    )
+    js = js.replace('children:[(0,T.jsx)(Qr,{}),(0,T.jsx)(`a`,{href:`#how`', 'children:[(0,T.jsx)(`a`,{href:`#how`')
+    js = js.replace(',(0,T.jsx)(`div`,{className:`mt-8`,children:(0,T.jsx)(Qr,{children:`Попробовать бесплатно`})})', '')
+    js = js.replace(',(0,T.jsx)(`p`,{className:`text-sm text-primary-foreground/50`,children:`Учебный стартап-проект. MVP веб-сервиса для рыбаков`})', '')
+    js = js.replace(',(0,T.jsx)(Z,{className:`mt-12 text-center`,children:(0,T.jsx)(Qr,{})})', '')
+    js = re.sub(r'function Qr\(.*?(?=function Q\()', '', js, count=1)
+    return js.replace(
+        'items-center justify-between rounded-xl bg-muted px-3 py-2 text-sm',
+        'items-center justify-between gap-3 rounded-xl bg-muted px-3 py-2 text-sm',
+    ).replace(
+        '(0,T.jsx)(`span`,{className:`font-semibold text-primary`,children:n})]},t))',
+        '(0,T.jsx)(`span`,{className:`font-semibold text-primary`,style:t===`Давление`?{textAlign:`right`}:void 0,children:n})]},t))',
+    )
+
+
 def apply_updates():
     partner_markup = (ROOT / 'source/partners.html').read_text().strip()
     (DIST / 'assets/partners-content.js').write_text('export const partnersMarkup = ' + json.dumps(partner_markup, ensure_ascii=False) + ';\n')
@@ -24,7 +78,7 @@ def apply_updates():
     if 'href="#partners"' not in html:
         html = re.sub(r'(<a href="#team"([^>]+)>Команда</a>)', r'<a href="#partners"\2>Партнёрам</a>\1', html)
     html = html.replace('Бесплатно на этапе MVP', 'Бесплатно для рыбаков')
-    html_path.write_text(html)
+    html_path.write_text(update_static_layout(html))
 
     route = DIST / 'assets/routes-Ck51385J.js'
     js = route.read_text()
@@ -39,7 +93,7 @@ def apply_updates():
         js = js.replace(marker, insertion + marker, 1)
     js = js.replace('Бесплатно на этапе MVP', 'Бесплатно для рыбаков')
     js = js.replace('На этапе MVP сервис бесплатный.', 'Базовый доступ для рыбаков планируем оставить бесплатным. Основной источник дохода проекта — рекламные размещения рыболовных магазинов, производителей снастей, платных водоёмов и баз отдыха. Сейчас партнёрское направление находится на этапе подготовки.')
-    route.write_text(js)
+    route.write_text(update_client_layout(js))
     print('Updated: platform badge removed; partner section, navigation and business model added.')
 
 if __name__ == '__main__':
