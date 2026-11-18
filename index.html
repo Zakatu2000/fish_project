@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121810">
+  <meta name="description" content="Рыбный Прогноз помогает выбрать водоём, время клёва и снасти. Попробуйте интерактивное демо.">
+  <title>Рыбный Прогноз — Найди своё окно клёва</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/fonts.css">
+  <link rel="stylesheet" href="assets/landing.css">
+  <script src="assets/forecast.js" defer></script>
+  <script src="assets/motion.js" defer></script>
+</head>
+<body id="top">
+  <a class="skip" href="#demo">К демонстрации</a>
+  <div class="nav-shell">
+    <nav class="wrap navigation" aria-label="Основная навигация">
+      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M8 12C10 8.3 16 6.2 21 12c-5 5.8-11 3.7-13 0Z"/><path d="M8 12 3 8v8l5-4"/><circle cx="17.3" cy="11.7" r=".9" fill="currentColor" stroke="none"/></svg></span> Рыбный Прогноз</a>
+      <div class="nav-links"><a href="#demo">Демо</a><a href="#how">Как работает</a><a href="#features">Возможности</a><a href="#partners">Партнёрам</a></div>
+    </nav>
+    <div class="reading-progress" aria-hidden="true"></div>
+  </div>
+  <header class="hero">
+    <img class="hero-photo" src="assets/hero-lake-CgYq51h5.jpg" width="1600" height="1008" alt="" fetchpriority="high">
+    <div class="wrap hero-body">
+      <p class="eyebrow"><span class="dot"></span> Планировщик рыбалки</p>
+      <h1>Найди своё<br>окно <em>клёва.</em></h1>
+      <p class="hero-copy">Узнай, когда рыба может быть активнее. Выбери водоём и день, сравни условия на воде и подбери снасти перед выездом.</p>
+      <a class="hero-link" href="#demo">Открыть демо <span aria-hidden="true">↓</span></a>
+    </div>
+    <div class="wrap hero-bottom"><span>НИЖЕГОРОДСКАЯ ОБЛАСТЬ · ДЕМО</span><span>БЕСПЛАТНО ДЛЯ РЫБАКОВ</span></div>
+  </header>
+
+  <main>
+    <section class="wrap demo section" id="demo" aria-labelledby="demo-title">
+      <div class="section-head">
+        <div><p class="eyebrow">Интерактивное демо</p><h2 id="demo-title">Собери план рыбалки</h2></div>
+        <p>Выбери место и день. Демо покажет лучшее окно, условия на воде и снасти для выбранной рыбы.</p>
+      </div>
+      <div class="dashboard">
+        <div class="dashboard-top">
+          <label for="water">Водоём
+            <select id="water"><option value="volga">Волга · Нижний Новгород</option><option value="oka">Ока · Богородский район</option><option value="lake">Горьковское водохранилище</option></select>
+          </label>
+          <fieldset>
+            <legend>День</legend>
+            <div class="days">
+              <label><input type="radio" name="day" value="0" checked> <span>Сегодня</span></label>
+              <label><input type="radio" name="day" value="1"> <span>Завтра</span></label>
+              <label><input type="radio" name="day" value="2"> <span>Послезавтра</span></label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="dashboard-body">
+          <div class="forecast" aria-live="polite" aria-atomic="true">
+            <div class="forecast-top"><div><p class="label">Лучшее окно</p><strong id="window">05:30–09:00</strong></div><div class="score"><strong id="score">78</strong><span>%</span><small>активность</small></div></div>
+            <p id="forecast-note" class="forecast-note">Утром вода спокойнее, а давление держится стабильно.</p>
+            <div class="chart" role="img" id="chart" aria-label="Активность по часам: утром выше">
+              <span style="--level:28%"></span><span style="--level:43%"></span><span style="--level:78%" class="peak"></span><span style="--level:76%"></span><span style="--level:67%"></span><span style="--level:54%"></span><span style="--level:45%"></span><span style="--level:38%"></span><span style="--level:34%"></span><span style="--level:42%"></span><span style="--level:48%"></span><span style="--level:37%"></span>
+            </div>
+            <div class="chart-axes" aria-hidden="true"><span>04:00</span><span>08:10</span><span>12:15</span><span>16:20</span><span>20:30</span></div>
+          </div>
+          <div class="conditions" aria-live="polite">
+            <p class="label">Условия на воде</p>
+            <dl>
+              <div><dt>Погода</dt><dd id="weather">+18 °C, облачно</dd></div>
+              <div><dt>Давление</dt><dd id="pressure">752 мм рт. ст., стабильно</dd></div>
+              <div><dt>Ветер</dt><dd id="wind">ЮЗ, 3 м/с</dd></div>
+              <div><dt>Фаза Луны</dt><dd id="moon">Растущая</dd></div>
+            </dl>
+            <div class="gear"><p class="label">Что взять</p><strong id="fish">Окунь и щука</strong><p id="gear">Воблер 5–7 см, спиннинг с тестом 5–20 г.</p></div>
+          </div>
+        </div>
+        <details class="trip-checklist">
+          <summary>Чек-лист перед выездом</summary>
+          <label><input type="checkbox"> Сверить время выезда с окном клёва</label>
+          <label><input type="checkbox"> Подготовить подходящую приманку и запасную оснастку</label>
+          <label><input type="checkbox"> Проверить погоду и правила водоёма перед выездом</label>
+        </details>
+        <p class="demo-note"><span class="dot"></span> Условия и оценки в демо приведены для примера.</p>
+      </div>
+    </section>
+
+    <section class="story" id="problem" aria-labelledby="problem-title">
+      <div class="story-image" aria-hidden="true"><div></div></div>
+      <div class="wrap story-body">
+        <div class="story-heading">
+          <p class="eyebrow">Знакомая ситуация</p>
+          <h2 id="problem-title">Рыбалка часто начинается с догадок</h2>
+        </div>
+        <ul class="story-list">
+          <li>Какую наживку взять сегодня?</li>
+          <li>Стоит ли ехать, если погода меняется?</li>
+          <li>Каким советам о снастях верить?</li>
+          <li>Как новичку выбрать место и время?</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="wrap section solution" id="solution" aria-labelledby="solution-title">
+      <p class="eyebrow">Решение</p><h2 id="solution-title">План рыбалки в одном месте</h2>
+      <p>Рыбный Прогноз связывает условия на воде с практическими рекомендациями. Вместо поисков по форумам можно посмотреть оценку клёва по выбранному водоёму, разобраться, как на неё влияют погода, давление, ветер и фаза Луны, и собрать приманки, снасти и прикормку по короткому списку.</p>
+    </section>
+
+    <section class="process section" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <p class="eyebrow">Как работает</p><h2 id="how-title">От идеи до первого заброса</h2>
+        <ol class="steps">
+          <li><span>01</span><h3>Выбери водоём</h3><p>В демо выбери название из списка и укажи день. Для полной версии планируем поиск по названию и выбор на карте.</p></li>
+          <li><span>02</span><h3>Найди окно клёва</h3><p>Посмотри оценку активности по часам. Рядом видны погода, давление, ветер и фаза Луны.</p></li>
+          <li><span>03</span><h3>Собери снасти</h3><p>Посмотри, на какую рыбу рассчитан сценарий, и подбери приманку и оснастку. Перед выездом пройдись по чек-листу.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="wrap section" id="features" aria-labelledby="features-title">
+      <p class="eyebrow">Возможности</p><h2 id="features-title">Всё, что нужно для подготовки</h2>
+      <ul class="features-grid">
+        <li><h3>Оценка клёва</h3><p>Показывает активность в процентах и помогает сравнить время выезда.</p></li>
+        <li><h3>Подбор приманки</h3><p>Учитывает предполагаемую рыбу и условия ловли.</p></li>
+        <li><h3>Рекомендации по снастям</h3><p>Подсказывает, какой тип оснастки взять и на что обратить внимание.</p></li>
+        <li><h3>Прогноз для водоёма</h3><p>Привязывает условия и рекомендации к месту, куда собираешься.</p></li>
+        <li><h3>Чек-лист перед поездкой</h3><p>Помогает проверить приманки, оснастку и время выезда.</p></li>
+        <li><h3>График активности</h3><p>Показывает лучшее окно дня и выносит условия на воде в отдельную карточку.</p></li>
+      </ul>
+    </section>
+
+    <section class="audience section" id="audience" aria-labelledby="audience-title">
+      <div class="wrap editorial-grid">
+        <div><p class="eyebrow">Для кого</p><h2 id="audience-title">Для тех, кто хочет ловить, а не гадать</h2></div>
+        <ul class="editorial-list">
+          <li>Новички, которые хотят рыбачить увереннее</li>
+          <li>Рыбаки, которым важно экономить время на подготовке</li>
+          <li>Те, кто хочет выбирать условия для выезда заранее</li>
+          <li>Те, кому нужны быстрые и конкретные советы</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="wrap section editorial-grid" id="principles" aria-labelledby="principles-title">
+      <div><p class="eyebrow">Почему нам доверяют</p><h2 id="principles-title">Что показывает прогноз</h2></div>
+      <ul class="editorial-list">
+        <li>Оценка клёва помогает сравнить условия. Фактический улов зависит и от техники, места и снастей.</li>
+        <li>Для полной версии планируем использовать погодные данные и параметры водоёма. В демо эти условия заданы заранее.</li>
+        <li>Рекомендации собраны в короткие карточки, которые удобно открыть перед выездом.</li>
+        <li>Прототип помогает проверить, какие подсказки действительно нужны рыбакам.</li>
+      </ul>
+    </section>
+
+    <section class="section partners" id="partners" aria-labelledby="partners-title">
+      <div class="wrap">
+        <div class="partners-wrap">
+          <p class="eyebrow">Магазинам и рыболовным угодьям</p>
+          <h2 id="partners-title">Помогите рыбакам найти ваш магазин или водоём</h2>
+          <p class="partners-intro">Рыбный Прогноз объединяет людей, которые выбирают место для рыбалки и готовят снасти. Для рыболовных магазинов, владельцев платных водоёмов и баз отдыха мы планируем рекламные размещения рядом с полезной информацией о подготовке к поездке.</p>
+          <div class="partners-grid">
+            <article class="partners-card">
+              <span class="partners-type">Где купить снасти</span>
+              <h3>Рыболовным магазинам и производителям</h3>
+              <p>Расскажите о снастях, наживке и прикормке аудитории, которая собирается на рыбалку и выбирает, что взять с собой.</p>
+              <ul>
+                <li>Планируем карточки магазинов и рекламные блоки о товарах.</li>
+                <li>Адрес, сайт и ассортимент помогут рыбаку выбрать, где купить нужное.</li>
+                <li>Формат подойдёт местным магазинам, торговым сетям и производителям снастей.</li>
+              </ul>
+            </article>
+            <article class="partners-card">
+              <span class="partners-type">Куда поехать на рыбалку</span>
+              <h3>Платным водоёмам, угодьям и базам отдыха</h3>
+              <p>Помогите рыбакам узнать о месте для поездки: какие виды рыбы встречаются, как добраться и на каких условиях можно ловить.</p>
+              <ul>
+                <li>Планируем карточки водоёмов и баз с описанием условий рыбалки.</li>
+                <li>В карточке можно будет представить инфраструктуру, правила и контакты.</li>
+                <li>Рекламное размещение познакомит с вашим предложением тех, кто выбирает место отдыха.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="partners-model">
+            <h3>Для рыбаков — бесплатно</h3>
+            <p>Основная бизнес-модель проекта — <strong>рекламные размещения</strong> магазинов, производителей снастей, платных водоёмов и баз отдыха. За счёт этого планируем поддерживать бесплатный базовый доступ к прогнозу и рекомендациям. Платное продвижение будем отмечать отдельно от информационных рекомендаций.</p>
+          </div>
+          <p class="partners-status">Партнёрское направление находится на этапе подготовки. Форматы и условия размещения ещё обсуждаются; реальные рекламодатели и их предложения появятся после согласования.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap section team" id="team" aria-labelledby="team-title">
+      <p class="eyebrow">Команда проекта</p><h2 id="team-title">Кто делает Рыбный Прогноз</h2>
+      <ul class="team-grid">
+        <li><span aria-hidden="true">НЛ</span><h3>Никита Ломакин</h3><p>Лидер проекта, главный программист</p></li>
+        <li><span aria-hidden="true">РН</span><h3>Роман Николаев</h3><p>Спикер-презентатор, дизайнер</p></li>
+        <li><span aria-hidden="true">МК</span><h3>Михаил Кованов</h3><p>Дизайнер, senior-программист</p></li>
+        <li><span aria-hidden="true">ДС</span><h3>Дмитрий Смирнов</h3><p>Маркетолог-презентатор</p></li>
+      </ul>
+    </section>
+
+    <section class="wrap section faq" id="faq" aria-labelledby="faq-title">
+      <h2 id="faq-title">Частые вопросы</h2>
+      <div>
+        <details><summary>Данные в демо реальные?</summary><p>Демо использует заранее подготовленные сценарии для трёх водоёмов. Они показывают, как будет выглядеть прогноз с погодными данными.</p></details>
+        <details><summary>Что значит «окно клёва»?</summary><p>Это промежуток дня, когда условия для ловли выбранной рыбы выглядят наиболее благоприятными. Фактический улов зависит и от места, снастей и техники.</p></details>
+        <details><summary>Какие данные анализирует сервис?</summary><p>Для рабочей версии планируем учитывать погоду, давление, ветер, фазу Луны и параметры выбранного водоёма. В демо эти условия заданы заранее.</p></details>
+        <details><summary>Для каких рыбаков подходит?</summary><p>Для начинающих и тех, кто хочет тратить меньше времени на выбор места, приманок и снастей.</p></details>
+        <details><summary>Как получить доступ?</summary><p>Демо уже можно открыть на этой странице без регистрации. Доступ к рабочей версии пока готовится.</p></details>
+        <details><summary>Сервис гарантирует улов?</summary><p>Оценка показывает, насколько условия могут быть благоприятны. Улов зависит от конкретного места, снастей и техники ловли.</p></details>
+        <details><summary>Будет ли сервис бесплатным?</summary><p>Базовый прогноз и рекомендации для рыбаков планируем оставить бесплатными. Развитие сервиса рассчитываем финансировать рекламой партнёров.</p></details>
+      </div>
+    </section>
+    <section class="closing" aria-labelledby="closing-title">
+      <div class="wrap"><h2 id="closing-title">Собирайтесь на рыбалку с пониманием, а не наугад</h2><a class="hero-link" href="#demo">Вернуться к демо <span aria-hidden="true">↑</span></a></div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="wrap footer-inner"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M8 12C10 8.3 16 6.2 21 12c-5 5.8-11 3.7-13 0Z"/><path d="M8 12 3 8v8l5-4"/><circle cx="17.3" cy="11.7" r=".9" fill="currentColor" stroke="none"/></svg></span> Рыбный Прогноз</a><nav aria-label="Навигация в подвале"><a href="#team">Команда</a><a href="#faq">Вопросы</a><a href="#top">Наверх ↑</a></nav></div></footer>
+</body>
+</html>
